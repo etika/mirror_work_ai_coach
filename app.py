@@ -41,13 +41,14 @@ with gr.Blocks() as demo:
     gr.Markdown("## 🪞 Mirror Work AI Coach")
     chatbot = gr.Chatbot()
     txt = gr.Textbox(label="Type your message here")
-    
+
     def respond(msg, chat_history):
         response = mirror_coach(msg)
         chat_history.append((msg, response))
         return "", chat_history
-    
-    txt.submit(respond, [txt, chatbot], [txt, chatbot])
+
+    # Enable browser TTS so the user hears responses
+    txt.submit(respond, [txt, chatbot], [txt, chatbot], text_to_speech=True)
 
 # --- Dynamic port for Render ---
 port = int(os.environ.get("PORT", 8080))
