@@ -50,5 +50,6 @@ with gr.Blocks() as demo:
     txt.submit(respond, [txt, chatbot], [txt, chatbot], text_to_speech=True)
 
 # --- Dynamic port for Render ---
-port = int(os.environ.get("POR
+port = int(os.environ.get("PORT", 8080))
+demo.launch(server_name="0.0.0.0", server_port=port)
 
