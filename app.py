@@ -47,7 +47,7 @@ with gr.Blocks() as demo:
         chat_history.append((msg, response))
         return "", chat_history
 
-    # Enable browser TTS so the user hears responses
+    # Enable browser text-to-speech
     txt.submit(respond, [txt, chatbot], [txt, chatbot], text_to_speech=True)
 
 # --- Dynamic port for Render ---
