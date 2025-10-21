@@ -20,7 +20,6 @@ memory = ConversationBufferMemory(input_key="input", output_key="output")
 
 # --- Mirror Work Coach logic ---
 def mirror_coach(user_input):
-    # Load previous memory
     context = memory.load_memory_variables({}).get("history", "")
     prompt = f"""
 You are a calm and compassionate mirror work coach.
@@ -47,10 +46,9 @@ with gr.Blocks() as demo:
         chat_history.append((msg, response))
         return "", chat_history
 
-    # Enable browser text-to-speech
+    # Browser handles text-to-speech
     txt.submit(respond, [txt, chatbot], [txt, chatbot], text_to_speech=True)
 
 # --- Dynamic port for Render ---
-port = int(os.environ.get("PORT", 8080))
-demo.launch(server_name="0.0.0.0", server_port=port)
+port = int(os.environ.get("POR
 
