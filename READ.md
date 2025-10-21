@@ -5,8 +5,7 @@ A web-based mirror work AI coach using LangChain + OpenAI GPT.
 ## Features
 - Gentle self-love guidance
 - Conversational memory
-- Optional text-to-speech feedback
-- Browser-based UI via Gradio
+- Browser-based chat interface via Gradio
 
 ## How to Run Locally
 ```bash

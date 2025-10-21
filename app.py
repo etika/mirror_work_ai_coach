@@ -1,8 +1,7 @@
 import os
 import gradio as gr
-from langchain.chat_models.openai import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
-import pyttsx3
 
 # --- Load OpenAI API key from environment ---
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -19,11 +18,7 @@ llm = ChatOpenAI(
 # --- Conversation memory ---
 memory = ConversationBufferMemory(input_key="input", output_key="output")
 
-# --- Optional: text-to-speech ---
-engine = pyttsx3.init()
-engine.setProperty('rate', 150)  # slower, calm pace
-engine.setProperty('volume', 0.9)
-
+# --- Mirror Work Coach logic ---
 def mirror_coach(user_input):
     # Load previous memory
     context = memory.load_memory_variables({}).get("history", "")
@@ -39,11 +34,6 @@ Coach:
 """
     response = llm.predict(prompt).strip()
     memory.save_context({"input": user_input}, {"output": response})
-
-    # Speak the response (optional)
-    engine.say(response)
-    engine.runAndWait()
-
     return response
 
 # --- Gradio UI ---
