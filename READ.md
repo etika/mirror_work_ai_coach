@@ -1,4 +1,4 @@
-# 🪞 Mirror Work AI Coach (Gradio Web App)
+# 🪞 Mirror Work AI Coach
 
 A web-based mirror work AI coach using LangChain + OpenAI GPT.
 

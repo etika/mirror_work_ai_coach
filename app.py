@@ -1,10 +1,20 @@
+import os
 import gradio as gr
-from langchain.chat_models import ChatOpenAI
+from langchain.chat_models.openai import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 import pyttsx3
 
+# --- Load OpenAI API key from environment ---
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("Please set the OPENAI_API_KEY environment variable.")
+
 # --- LLM setup ---
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.7)
+llm = ChatOpenAI(
+    model="gpt-4o-mini",
+    temperature=0.7,
+    openai_api_key=OPENAI_API_KEY
+)
 
 # --- Conversation memory ---
 memory = ConversationBufferMemory(input_key="input", output_key="output")
@@ -49,7 +59,7 @@ with gr.Blocks() as demo:
     
     txt.submit(respond, [txt, chatbot], [txt, chatbot])
 
-# --- Run app ---
-if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=8080)
+# --- Dynamic port for Render ---
+port = int(os.environ.get("PORT", 8080))
+demo.launch(server_name="0.0.0.0", server_port=port)
 

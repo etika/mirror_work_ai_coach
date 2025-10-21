@@ -1,5 +1,5 @@
 gradio
-langchain
+langchain==0.1.114
 openai
 pyttsx3
 
